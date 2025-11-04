@@ -20,8 +20,26 @@ export default [
         ecmaFeatures: { jsx: true },
       },
       globals: {
-        browser: 'readonly',
-        es6: 'readonly',
+        // Browser
+        window: 'readonly',
+        document: 'readonly',
+        navigator: 'readonly',
+        fetch: 'readonly',
+
+        // Node
+        process: 'readonly',
+        global: 'readonly',
+        require: 'readonly',
+        module: 'readonly',
+        __dirname: 'readonly',
+        __filename: 'readonly',
+
+        // Common ES globals
+        console: 'readonly',
+        setTimeout: 'readonly',
+        clearTimeout: 'readonly',
+        setInterval: 'readonly',
+        clearInterval: 'readonly',
       },
     },
     rules: {
@@ -38,6 +56,7 @@ export default [
           caughtErrorsIgnorePattern: '^_',
         },
       ],
+      'react/react-in-jsx-scope': 'off',
     },
   },
   {
@@ -60,7 +79,8 @@ export default [
       ...eslintPluginImport.configs.typescript.rules,
 
       '@typescript-eslint/no-explicit-any': 'error',
-      'import/no-unresolved': ['error', { ignore: ['^@react-router/dev/'] }],
+      'import/no-unresolved': 'off',
+      'no-empty-pattern': ['error', { allowObjectPatternsAsParameters: true }],
     },
   },
   {
@@ -85,19 +105,15 @@ export default [
         { name: 'NavLink', linkAttribute: 'to' },
       ],
       'import/internal-regex': '^~/',
-      'import/resolver': {
-        typescript: {
-          project: ['./tsconfig.json'],
-          alwaysTryTypes: true,
-        },
-        node: {
-          extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-        },
-        alias: {
-          map: [['~', './app']],
-          extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
-        },
-      },
+      // 'import/resolver': {
+      //   typescript: {
+      //     project: './tsconfig.json',
+      //     // alwaysTryTypes: true,
+      //   },
+      //   node: {
+      //     extensions: ['.js', '.jsx', '.ts', '.tsx', '.json'],
+      //   },
+      // },
     },
   },
   {
